@@ -198,6 +198,12 @@ variable "protocol_version" {
   type        = string
 }
 
+variable "proxy_protocol_v2" {
+  description = "Whether to enable support for proxy protocol v2 on Network Load Balancers."
+  default     = false
+  type        = string
+}
+
 variable "efs_volumes" {
   description = "Volumes definitions"
   default     = []
