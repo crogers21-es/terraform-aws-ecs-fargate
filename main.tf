@@ -112,7 +112,7 @@ resource "aws_lb_target_group" "task" {
   }
   protocol_version = var.protocol_version
 
-  proxy_protocol_v2 = data.aws_lb.lb.load_balancer_type == "network" ? "" : var.proxy_protocol_v2
+  proxy_protocol_v2 = data.aws_lb.lb[0].load_balancer_type == "network" ? "" : var.proxy_protocol_v2
 
   # NOTE: TF is unable to destroy a target group while a listener is attached,
   # therefor we have to create a new one before destroying the old. This also means
