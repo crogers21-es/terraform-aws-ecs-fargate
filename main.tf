@@ -107,6 +107,8 @@ resource "aws_lb_target_group" "task" {
   }
   protocol_version = var.protocol_version
 
+  proxy_protocol_v2 = var.proxy_protocol_v2
+
   # NOTE: TF is unable to destroy a target group while a listener is attached,
   # therefor we have to create a new one before destroying the old. This also means
   # we have to let it have a random name, and then tag it with the desired name.
