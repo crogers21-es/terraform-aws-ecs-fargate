@@ -3,11 +3,6 @@
 # ------------------------------------------------------------------------------
 data "aws_region" "current" {}
 
-data "aws_lb" "lb" {
-  count = var.lb_arn == "" ? 0 : 1
-  arn   = var.lb_arn
-}
-
 # ------------------------------------------------------------------------------
 # Cloudwatch
 # ------------------------------------------------------------------------------
@@ -112,7 +107,7 @@ resource "aws_lb_target_group" "task" {
   }
   protocol_version = var.protocol_version
 
-  proxy_protocol_v2 = data.aws_lb.lb[0].load_balancer_type == "network" ? false : var.proxy_protocol_v2
+  proxy_protocol_v2 = var.proxy_protocol_v2
 
   # NOTE: TF is unable to destroy a target group while a listener is attached,
   # therefor we have to create a new one before destroying the old. This also means
